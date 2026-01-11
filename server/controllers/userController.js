@@ -7,6 +7,7 @@ import appointmentModel from "../models/appointmentModel.js";
 import { v2 as cloudinary } from 'cloudinary'
 import stripe from "stripe";
 import razorpay from 'razorpay';
+import transporter from '../config/nodemailer.js'
 
 // Gateway Initialize
 const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY)
@@ -177,6 +178,29 @@ const bookAppointment = async (req, res) => {
 
         // save new slots data in docData
         await doctorModel.findByIdAndUpdate(docId, { slots_booked })
+
+        //Email to the user before res.json
+        await transporter.sendMail({
+            from: process.env.SENDER_EMAIL,
+            to: userData.email,
+            subject: "Appointment Booking Details",
+            html: `
+                <h2>Your Booking Details</h2>
+                <p>Dear ${userData.name},</p>
+
+                <p>Thank you for your booking. Here are your booking details:</p>
+                <ul>
+                    <li><strong>Booking Id:</strong> ${newAppointment._id}</li>
+                    <li><strong>Doctor Name:</strong> ${docData.name}</li>
+                    <li><strong>Date:</strong> ${newAppointment.date}</li>
+                    <li><strong>Booking Amount:</strong> ${process.env.CURRENCY ||'₹'} ${newAppointment.amount}</li>
+                </ul>
+                <p>We look forward to welcome you!</p>
+                <P>If you face any issue , feel free to contact us.</P>
+                <p>Thank You</p>
+
+            `
+        });
 
         res.json({ success: true, message: 'Appointment Booked' })
 
