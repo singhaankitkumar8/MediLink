@@ -320,7 +320,8 @@ const paymentStripe = async (req, res) => {
             return res.json({ success: false, message: 'Appointment Cancelled or not found' })
         }
 
-        const currency = process.env.CURRENCY.toLocaleLowerCase()
+        //const currency = process.env.CURRENCY.toLocaleLowerCase()
+        const currency ="usd"
 
         const line_items = [{
             price_data: {
