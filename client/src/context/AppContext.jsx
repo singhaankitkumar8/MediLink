@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 export const AppContext = createContext()
 
@@ -12,6 +13,7 @@ const AppContextProvider = (props) => {
     const [doctors, setDoctors] = useState([])
     const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : '')
     const [userData, setUserData] = useState(false)
+    const navigate = useNavigate()
 
     // Getting Doctors using API
     const getDoctorsData = async () => {
@@ -71,7 +73,8 @@ const AppContextProvider = (props) => {
         setToken,
         userData, 
         setUserData, 
-        loadUserProfileData
+        loadUserProfileData,
+        navigate
     }
 
     return (

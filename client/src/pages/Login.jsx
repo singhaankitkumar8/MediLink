@@ -90,7 +90,6 @@ const Login = () => {
             type="password"
             minLength="8"
             maxLength="16"
-            pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm"
             required
           />
         </div>

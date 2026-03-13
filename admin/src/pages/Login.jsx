@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { DoctorContext } from "../context/DoctorContext";
 import { AdminContext } from "../context/AdminContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [state, setState] = useState("Admin");
@@ -14,6 +15,7 @@ const Login = () => {
 
   const { setDToken } = useContext(DoctorContext);
   const { setAToken } = useContext(AdminContext);
+  const navigate = useNavigate();
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -27,6 +29,7 @@ const Login = () => {
         if (data.success) {
           setAToken(data.token);
           localStorage.setItem("aToken", data.token);
+          navigate('/admin-dashboard')
         } else {
           toast.error(data.message);
         }
@@ -38,6 +41,7 @@ const Login = () => {
         if (data.success) {
           setDToken(data.token);
           localStorage.setItem("dToken", data.token);
+          navigate('/doctor-dashboard')
         } else {
           toast.error(data.message);
         }
@@ -72,7 +76,6 @@ const Login = () => {
             type="password"
             minLength="8"
             maxLength="16"
-            pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm"
             required
           />
         </div>

@@ -4,6 +4,7 @@ import { AppContext } from '../context/AppContext.jsx'
 import { assets } from '../assets/assets.js';
 import RelatedDoctors from '../components/RelatedDoctors.jsx';
 import axios from 'axios';
+import { toast } from "react-toastify";
 
 const Appointment = () => {
   const {docId} = useParams();
@@ -75,12 +76,6 @@ const Appointment = () => {
                 time: formattedTime
             })
         }
-
-        //add slot to array
-        timeSlots.push({
-          datetime: new Date(currentDate),
-          time: formattedTime,
-        })
 
         //Increment current time by 30 minutes
         currentDate.setMinutes(currentDate.getMinutes() + 30)
@@ -189,7 +184,7 @@ const Appointment = () => {
           ))
         }
       </div>
-      <button onClick={bookAppointment} className='bg-(--primary) text-white text-sm font-light px-14 py-3 rounded-full my-6'>Book an Appointment</button>
+      <button onClick={bookAppointment} className='bg-(--primary) text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer'>Book an Appointment</button>
       </div>
 
         {/* Listing Related Doctors */}
