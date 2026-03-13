@@ -202,11 +202,11 @@ const bookAppointment = async (req, res) => {
             `
         });
 
-        res.json({ success: true, message: 'Appointment Booked' })
+        return res.json({ success: true, message: 'Appointment Booked' })
 
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: error.message })
+        return res.json({ success: false, message: error.message })
     }
 
 }
