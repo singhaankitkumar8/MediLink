@@ -1,6 +1,6 @@
 # Medilink
 
-[Medilink](https://medi-link-wheat.vercel.app/)
+[Live Demo of Medilink](https://medi-link-wheat.vercel.app/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 [![React](https://img.shields.io/badge/React-18.2.0-blue?logo=react&logoColor=white)](https://reactjs.org/)
